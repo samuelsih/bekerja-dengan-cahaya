@@ -18,9 +18,6 @@ export default class Scene {
     this.clock = undefined;
     this.stats = undefined;
     this.controls = undefined;
-
-    this.ambientLight = undefined;
-    this.directionalLight = undefined;
   }
 
   initialize() {
@@ -60,7 +57,7 @@ export default class Scene {
   }
 
   animate() {
-    window.requestAnimationFrame(this.animate.bind(this));
+    window.requestAnimationFrame(this.animate.bind(this)); //bukan this.scene
     this.render();
     this.stats.update();
     this.controls.update();
@@ -74,7 +71,7 @@ export default class Scene {
 
   addGround(color, yPosition) {
     const groundGeometry = new THREE.BoxGeometry(8, 0.5, 8);
-    const groundMaterial = new THREE.MeshPhongMaterial({ color: color });
+    const groundMaterial = new THREE.MeshStandardMaterial({ color: color });
     const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
     groundMesh.receiveShadow = true;
     groundMesh.position.y = yPosition;
@@ -83,7 +80,7 @@ export default class Scene {
 
   addBox(color, xPosition) {
     const bg = new THREE.BoxGeometry(1, 1, 1);
-    const bm = new THREE.MeshPhongMaterial({ color: color });
+    const bm = new THREE.MeshStandardMaterial({ color: color });
     const boxMesh = new THREE.Mesh(bg, bm);
     boxMesh.castShadow = true;
     boxMesh.position.x = xPosition;
@@ -130,7 +127,6 @@ export default class Scene {
 
     light.position.set(2, 2, 0);
     light.lookAt(0, 0, 0)
-
     const helper = new RectAreaLightHelper(light)
 
     this.group.add(light);
