@@ -9,6 +9,7 @@ export default class GUIControl {
         this.bidirectional = undefined;
         this.point = undefined;
         this.rectArea = undefined;
+        this.spotlight = undefined;
     }
 
     addAmbientConfig(al) {
@@ -111,5 +112,22 @@ export default class GUIControl {
         .addColor(rectAreaSettings, 'color')
         .onChange((value) => rectArea.color.set(value));
         this.point.open();
+    }
+
+    addSpotlight(sl, slHelper) {
+        const slSettings = {
+            visible: true,
+        };
+        
+        this.spotlight = this.gui.addFolder('spot light');
+        this.spotlight.add(slSettings, 'visible').onChange((value) => {
+            sl.visible = value;
+            slHelper.visible = value;
+        });
+
+        this.spotlight.add(sl, 'intensity', 0, 4, 0.5);
+        this.spotlight.add(sl, 'angle', Math.PI / 16, Math.PI / 2, Math.PI / 16);
+        this.spotlight.add(sl, 'castShadow');
+        this.spotlight.open();
     }
 }   

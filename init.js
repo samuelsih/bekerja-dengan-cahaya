@@ -128,12 +128,23 @@ export default class Scene {
   RectArea(width, height, color, intensity) {
     const light = new THREE.RectAreaLight(color, intensity, width, height);
 
-    light.position.set(5, 5, 0);
+    light.position.set(2, 2, 0);
     light.lookAt(0, 0, 0)
 
     const helper = new RectAreaLightHelper(light)
 
     this.group.add(light);
+
+    return [light, helper];
+  }
+
+  SpotLight(color, intensity) {
+    const light = new THREE.SpotLight(color, intensity);
+    light.position.set(0, 2, 2);
+    const helper = new THREE.SpotLightHelper(light);
+
+    this.group.add(light);
+    this.group.add(light.target);
 
     return [light, helper];
   }

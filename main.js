@@ -34,6 +34,11 @@ app.group.add(plHelper);
 guiControl.addPointConfig(pl, plHelper);
 
 // set up rect area light
-const [rectArea, rectAreaHelper] = app.RectArea(10, 10, 0xFFFFF, 3)
+const [rectArea, rectAreaHelper] = app.RectArea(5, 5, 0xFFFFF, 3)
 app.group.add(rectAreaHelper);
 guiControl.addRectAreaConfig(rectArea, rectAreaHelper);
+
+// set up spotlight
+const [sl, slHelper] = app.SpotLight(0xFFFFF, 1)
+app.group.add(slHelper);
+guiControl.addSpotlight(sl, slHelper);
